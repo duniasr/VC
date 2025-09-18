@@ -35,7 +35,7 @@ Además nos conectaremos al entorno 'VC_P1' creado con Anaconda.
 
 ## Resultados
 La visualización de los resultados se obtiene al ejecutar el código. Desglosamos ahora cada ejercicio:
-El uso de la IA ChatGPT fue usado para: resolver dudas, aplicar funcionalidades y funciones de la librería que desconocía y para el ejercicio 5 en proporción
+La IA ChatGPT se utilizó como recurso de apoyo para aclarar dudas, explorar funcionalidades de la librería que no conocía y obtener orientación en el ejercicio 5.
 
 ### Ejercicio 1
 Objetivo -> generar una imagen de 800x800 píxeles con el patrón de un tablero de ajedrez. Hay dos versiones:
