@@ -16,11 +16,7 @@ En la Práctica 1 se realizan transformaciones básicas en imágenes y vídeos h
 Para esta práctica haremos uso de Python 3.11, Anaconda y de las librerías:  
 - OpenCV  
 - NumPy  
-- Matplotlib  
-- Y los módulos de Pillow(PIL) siguientes:  
-    - Image  
-    - ImageDraw  
-    - ImageFont  
+- Matplotlib 
 
 Además nos conectaremos al entorno 'VC_P1' creado con Anaconda.
 
