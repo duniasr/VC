@@ -32,8 +32,6 @@ Empezamos aplicando la función `cv2.Canny` con la que obtenemos los contornos d
 Luego obtenemos el número de píxeles blancos por fila. En dichas filas aplicaremos la función `max()` para calcular el máximo número de píxeles blancos en una fila, valor que usaremos para calcular el umbral(90% del valor máximo).  
 Seguidamente comienza la iteración de las filas en busca de aquíellas que superen o igualen el umbral definido, así pues las filas que lo cumplan serán impresas por texto y marcadas en la gráfica.
 
-Al comparar, observamos que usando sobel, en la imagen se resaltan más los bordes horizontales fuertes como los ojos y frente, donde el motivo de tantas líneas puede deberse a algo de ruido. Por la otra parte, en la imagen que usa canny, se captan más los bordes de las estructuras verticales, como la nariz.
-
 ### Ejercicio 2
 Objetivo -> aplicar umbralizado a la imagen resultante de Sobel (convertida a 8 bits), y posteriormente realizar el conteo por filas y columnas similar al realizado en el ejemplo con la salida de Canny de píxeles no nulos. Calcula el valor máximo de la cuenta por filas y columnas, y determina las filas y columnas por encima del 0.90*máximo.
 
@@ -43,6 +41,7 @@ Luego, usando Sobel, contamos el nº de píxeles por filas y columnas con la fun
 Hacemos el mismo procedimiento para el método Canny. Para visualizar estos resultados dibujamos líneas en las filas y columnas significativas con `cv2.line`.
 
 Finalmente mostramos ambas imágenes Sobel y Canny.
+Al comparar, observamos que usando sobel, en la imagen se resaltan más los bordes horizontales fuertes como los ojos y frente, donde el motivo de tantas líneas puede deberse a algo de ruido. Por la otra parte, en la imagen que usa canny, se captan más los bordes de las estructuras verticales, como la nariz.
 
 ### Ejercicio 3
 Objetivo ->  proponer un demostrador que capture las imágenes de la cámara, y les permita exhibir lo aprendido
