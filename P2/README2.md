@@ -10,7 +10,7 @@ Curso 2025/2026
 <!-- - [Práctica 2](P2/README.md) -->
 
 ## Descripción
-En la Práctica 1 se realizan transformaciones básicas en imágenes y vídeos haciendo uso de las librerías; OpenCV, NumPy , Matplotlib y Pillow. En específico con la práctica se pretende entender el funcionamiento para la deteccion de bordes y la sustracción de fondo.
+En la Práctica 2 se realizan transformaciones básicas en imágenes y vídeos haciendo uso de las librerías; OpenCV, NumPy , Matplotlib. En específico con la práctica se pretende entender el funcionamiento para la deteccion de bordes y la sustracción de fondo.
 
 ## Requisitos
 Para esta práctica haremos uso de Python 3.11, Anaconda y de las librerías:  
