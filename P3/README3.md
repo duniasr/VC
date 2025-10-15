@@ -45,7 +45,7 @@ Finalmente se visualizan los resultados con `cv2.rectangle` y `cv2.putText` que 
 
 Para comprobar, el código propuesto se ha aplicado a 3 imágenes:
 1. Caso ideal con fondo blanco y sin solapamiento
-![caso1](./outputs/output1.png)
+![caso1](./outputs/Monedas.png)  ![caso1](./outputs/MonedasM.png)
 2. Caso no ideal 1
 ![caso1](./outputs/output2.png)
 3. Caso no ideal 3
@@ -73,7 +73,7 @@ A continuación, se visualizan los resultados. Un bucle recorre las detecciones 
 
 #### Análisis de la matriz de confusión:
 
-![Matriz de confusión](./imagenes/output2.png)
+![Matriz de confusión](./outputs/output2.png)
 
 En la matriz obtenida podemos interpretar lo siguiente:
  - Partículas FRA:
@@ -106,8 +106,8 @@ Accuracy (Exactitud) General: 0.67
          TAR       0.38      0.86      0.52        14
 
     accuracy                           0.67        96
-   macro avg       0.68      0.70      0.64        96
-weighted avg       0.76      0.67      0.68        96
+    macro avg      0.68      0.70      0.64        96
+   weighted avg    0.76      0.67      0.68        96
 
 ------------------------------------
  - **Precisión**: mide la calidad de las predicciones -> TP/(TP+FP)
