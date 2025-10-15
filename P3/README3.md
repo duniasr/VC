@@ -47,9 +47,9 @@ Para comprobar, el código propuesto se ha aplicado a 3 imágenes:
 1. Caso ideal con fondo blanco y sin solapamiento
 ![caso1](./outputs/Monedas.png)  ![caso1](./outputs/MonedasM.png)
 2. Caso no ideal 1
-![caso1](./outputs/Monedas2.png)  ![caso1](./outputs/Monedas2M.png)
-3. Caso no ideal 3
-![caso1](./outputs/Monedas3.png) ![caso1](./outputs/Monedas3.png)
+![caso2](./outputs/Monedas2.png)  ![caso1](./outputs/Monedas2M.png)
+3. Caso no ideal 2
+![caso3](./outputs/Monedas3.png) ![caso1](./outputs/Monedas3M.png)
 
 ### Ejercicio 2
 Objetivo -> extraer características (geométricas y/o visuales) de las tres imágenes completas de partida, y aprender patrones que permitan identificar las partículas en nuevas imágenes.
