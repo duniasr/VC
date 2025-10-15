@@ -44,8 +44,10 @@ Finalmente se visualizan los resultados con `cv2.rectangle` y `cv2.putText` que 
 
 Para comprobar he aplicado el código propuesto a 3 imágenes:
 1. Caso ideal con fondo blanco y sin solapamiento
-![caso1](./outputs/Monedas.png)  
-![caso1.2](./outputs/MonedasM.png)
+
+| Resultado Final | Máscara Generada |
+|:---:|:---:|
+| ![caso1](./outputs/Monedas.png) | ![caso1.2](./outputs/MonedasM.png) |
 2. Caso no ideal 1
 ![caso2](./outputs/Monedas2.png)  
 ![caso2.2](./outputs/Monedas2M.png)
