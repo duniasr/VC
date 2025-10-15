@@ -29,27 +29,27 @@ El uso de la IA ChatGPT fue usado para: resolver dudas, aplicar funcionalidades 
 ### Ejercicio 1
 Objetivo ->  identificar de forma interactiva (por ejemplo haciendo clic en la imagen) una moneda de un valor determinado en la imagen (por ejemplo de 1€). Tras obtener esa información y las dimensiones en milímetros de las distintas monedas, realiza una propuesta para estimar la cantidad de dinero en la imagen. Muestra la cuenta de monedas y dinero sobre la imagen. 
 
-Primero definimos un el archivo de la imagen de entrada y un diccionario, `DATOS_MONEDAS`, con la información de referencia del diámetro real y el valor de cada tipo de moneda. 
-También definimos las funciones auxiliares "redimensionar_para_mostrar" y "calibrar_escala". 
-    - La primiera ajusta el tamaño de las imágenes a un ancho máximo para evitar problemas de visualización.
-    - La segunda es una función de callback que se activa con el método `cv2.setMouseCallback`. Cuando el usuario hace click en la imagen, esta función identifica el contorno más cercano a las coordenadas del click. Usa `cv2.minEnclosingCircle` que determina el diámetro en píxeles del objeto de referencia, luego se compara dicho valor con el diámetro real conocido de la moneda de 1 euro, se calcula y establece la relación de escala `pixels_per_mm`, que será usada para medir las demás monedas.
+Primero definimos el archivo de la imagen de entrada y un diccionario, `DATOS_MONEDAS`, con la información de referencia del diámetro real y el valor de cada tipo de moneda. 
+También definimos la función auxiliar "calibrar_escala". 
+    - Es una función de callback que se activa con el método `cv2.setMouseCallback`. Cuando el usuario hace click en la imagen, esta función identifica el contorno más cercano a las coordenadas del click. Usa `cv2.minEnclosingCircle` que determina el diámetro en píxeles del objeto de referencia, luego se compara dicho valor con el diámetro real conocido de la moneda de 1 euro, se calcula y establece la relación de escala `pixels_per_mm`, que será usada para medir las demás monedas.
 
 A continuación pasamos al análisis automático de fondo y segmentación, el cual lograremos mediante una heurística: se muestrean las esquinas de la imagen, se convierten al espacio de color HSV, y se calcula su saturación media para determinar si esta es baja o alta.
     - En el caso de que sea baja, se clasificará al fondo como "simple"(blanco, gris,...). Además usaremos el umbralizado de Otsu sobre la imagen en escala de grises con la función `cv2.threshold` con el flag `cv2.THRESH_OTSU`, que es ideal para imágenes de alto contraste(ya que determina automáticamente el umbral de binarizazción óptimo).
-    - Si el caso dado es el contrario, saturación alta, usaremos segmentación por color HSV. Se aplica cv2.inRange para crear una máscara que aísla los píxeles dentro de un rango de color metálico. Posteriormente, cv2.morphologyEx realiza una operación de cierre morfológico para rellenar huecos y consolidar las formas de las monedas.
+    - Si el caso dado es el contrario, saturación alta, usaremos segmentación por color HSV. Se aplica `cv2.inRange` para crear una máscara que aísla los píxeles dentro de un rango de color metálico. Posteriormente, `cv2.morphologyEx` realiza una operación de cierre morfológico para rellenar huecos y consolidar las formas de las monedas.
 
-En la fase final haremos la detección, identificación y visualización de valores de monedas. Para ello empezaremos usando la función `cv2.findContours` que extrae los contornos de la máscara. Una vez hecha la calibración interactiva el, se itera sobre cada contorno y para cada uno se aplican filtros de área y circularidad, para descartar ruido y formas no redondas.
+En la fase final haremos la detección, identificación y visualización de valores de monedas. Para ello empezaremos usando la función `cv2.findContours` que extrae los contornos de la máscara. Una vez hecha la calibración interactiva, se itera sobre cada contorno y para cada uno se aplican filtros de área y circularidad, para descartar ruido y formas no redondas.
 Si un contorno pasa los filtros, se mide su diámetro en mm y se clasifica comparándolo con los valores del diccionario `DATOS_MONEDAS`, si se encuentra coincidencia, su valor se suma al total.
 
-Finalmente se visualizan los resultados con `cv2.rectangle` y `cv2.putText` que dibujan un recuadro y añaden la etiqueta con el valor de la moneda respectivamente. El tamaño de la fuente se calcula de forma dinámica, basándose en el diámetro en píxeles de cada moneda, lo que asegura que las etiquetas sean legibles independientemente de la resolución de la imagen. Para mejorar aún más la legibilidad, se dibuja un fondo negro sólido detrás de cada etiqueta antes de escribir el texto. El valor total acumulado se muestra en la esquina superior izquierda, y la imagen resultante se presenta utilizando matplotlib.pyplot.
+Finalmente se visualizan los resultados con `cv2.rectangle` y `cv2.putText` que dibujan un recuadro y añaden la etiqueta con el valor de la moneda respectivamente. El tamaño de la fuente se calcula de forma dinámica, basándose en el diámetro en píxeles de cada moneda, lo que asegura que las etiquetas sean legibles independientemente de la resolución de la imagen. Para mejorar aún más la legibilidad, se dibuja un fondo negro sólido detrás de cada etiqueta antes de escribir el texto. El valor total acumulado se muestra como título. Las imagenes con el valor total y la máscara se presentan utilizando matplotlib.pyplot.
 
-Para comprobar, el código propuesto se ha aplicado a 3 imágenes:
+Para comprobar he aplicado el código propuesto a 3 imágenes:
 1. Caso ideal con fondo blanco y sin solapamiento
 ![caso1](./outputs/Monedas.png)  ![caso1](./outputs/MonedasM.png)
 2. Caso no ideal 1
 ![caso2](./outputs/Monedas2.png)  ![caso1](./outputs/Monedas2M.png)
 3. Caso no ideal 2
 ![caso3](./outputs/Monedas3.png) ![caso1](./outputs/Monedas3M.png)
+
 
 ### Ejercicio 2
 Objetivo -> extraer características (geométricas y/o visuales) de las tres imágenes completas de partida, y aprender patrones que permitan identificar las partículas en nuevas imágenes.
