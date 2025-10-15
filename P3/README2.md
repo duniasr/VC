@@ -27,7 +27,7 @@ La visualización de los resultados se obtiene al ejecutar el código. Desglosam
 El uso de la IA ChatGPT fue usado para: resolver dudas, aplicar funcionalidades y funciones de la librería que desconocía y guiarme.
 
 ### Ejercicio 1
-Objetivo -> 
+Objetivo ->  identificar de forma interactiva (por ejemplo haciendo clic en la imagen) una moneda de un valor determinado en la imagen (por ejemplo de 1€). Tras obtener esa información y las dimensiones en milímetros de las distintas monedas, realiza una propuesta para estimar la cantidad de dinero en la imagen. Muestra la cuenta de monedas y dinero sobre la imagen. 
 
 Primero definimos un el archivo de la imagen de entrada y un diccionario, `DATOS_MONEDAS`, con la información de referencia del diámetro real y el valor de cada tipo de moneda. 
 También definimos las funciones auxiliares "redimensionar_para_mostrar" y "calibrar_escala". 
@@ -40,6 +40,7 @@ A continuación pasamos al análisis automático de fondo y segmentación, el cu
 
 En la fase final haremos la detección, identificación y visualización de valores de monedas. Para ello empezaremos usando la función `cv2.findContours` que extrae los contornos de la máscara. Una vez hecha la calibración interactiva el, se itera sobre cada contorno y para cada uno se aplican filtros de área y circularidad, para descartar ruido y formas no redondas.
 Si un contorno pasa los filtros, se mide su diámetro en mm y se clasifica comparándolo con los valores del diccionario `DATOS_MONEDAS`, si se encuentra coincidencia, su valor se suma al total.
+
 Finalmente se visualizan los resultados con `cv2.rectangle` y `cv2.putText` que dibujan un recuadro y añaden la etiqueta con el valor de la moneda respectivamente. El tamaño de la fuente se calcula de forma dinámica, basándose en el diámetro en píxeles de cada moneda, lo que asegura que las etiquetas sean legibles independientemente de la resolución de la imagen. Para mejorar aún más la legibilidad, se dibuja un fondo negro sólido detrás de cada etiqueta antes de escribir el texto. El valor total acumulado se muestra en la esquina superior izquierda, y la imagen resultante se presenta utilizando matplotlib.pyplot.
 
 Para comprobar, el código propuesto se ha aplicado a 3 imágenes:
@@ -51,7 +52,7 @@ Para comprobar, el código propuesto se ha aplicado a 3 imágenes:
 ![caso1](./imagenes/output3.png)
 
 ### Ejercicio 2
-Objetivo -> 
+Objetivo -> extraer características (geométricas y/o visuales) de las tres imágenes completas de partida, y aprender patrones que permitan identificar las partículas en nuevas imágenes.
 
 Primero definimos la función `get_features()` que lee las imagenes de FRA, TAR y PEL en escala de grises para detectar formas. Con `cv2.createCLAHE()` creamos un objeto CLAHE para mejorar el contraste de la imagen y que las partículas resalten sobre fondos con poca iluminación. Aplicamos también `cv2.GaussianBlur()` para suavizar la imagen y eliminar ruidos y `cv2.adaptiveThreshold()` para realizar un umbralizado adaptativo que calcula un umbral diferente para diferentes regiones de la imagen, y luego lo invierte para poner las partículas en blanco y el fondo en negro.
 Luego creamos un pequeño kernel `np.ones` para usar con las operaciones morfológicas `cv2.morphologyEx` con los flags `MORPH_OPEN` y `MORPH_CLOSE` que eliminan pequeños puntos de ruido y rellenan pequeños agujeros en las partículas respectivamente.
@@ -74,9 +75,52 @@ A continuación, se visualizan los resultados. Un bucle recorre las detecciones 
 
 ![Matriz de confusión](./imagenes/output2.png)
 
-![Imagen con partículas detectadas](./imagenes/output1.png)
+En la matriz obtenida podemos interpretar lo siguiente:
+ - Partículas FRA:
+    - TP(true positive): partículas FRA clasificadas como FRA -> 34
+    - FP(false positive): partículas TAR o PEL clasificadas como FRA -> 9 PEL y 1 TAR
+    - FN(false negative): partículas FRA clasificadas como TAR o PEL -> 1 PEL y 13 TAR
+ 
+ - Partículas PEL:
+    - TP(true positive): partículas PEL clasificadas como PEL -> 18
+    - FP(false positive): partículas TAR o FRA clasificadas como PEL -> 1 TAR y 1 FRA
+    - FN(false negative): partículas PEL clasificadas como TAR o FRA -> 7 TAR y 9 FRA
 
+ - Partículas TAR:
+    - TP(true positive): partículas TAR clasificadas como TAR -> 12
+    - FP(false positive): partículas PEL o FRA clasificadas como TAR -> 7 PEL y 13 FRA
+    - FN(false negative): partículas TAR clasificadas como PEL o FRA -> 1 PEL y 1 FRA
 
+Observamos que el clasificador que hemos creado detecta muchas partículas bien, pero tiene un problema pues detecta muchos falsos negativos.
+
+Para concluir analizaremos los resultados impresos:
+--- Resumen de Resultados ---
+Total de partículas evaluadas: 96
+Accuracy (Exactitud) General: 0.67
+
+--- Métricas por Tipo de Partícula ---
+              precision    recall  f1-score   support
+
+         FRA       0.77      0.71      0.74        48
+         PEL       0.90      0.53      0.67        34
+         TAR       0.38      0.86      0.52        14
+
+    accuracy                           0.67        96
+   macro avg       0.68      0.70      0.64        96
+weighted avg       0.76      0.67      0.68        96
+
+------------------------------------
+ - **Precisión**: mide la calidad de las predicciones -> TP/(TP+FP)
+    La precisión de las partículas FRA y PEL son buenas siendo la de PEL la mejor, sin embargo la precisión de TAR es bastante mala pues tiene muchos falsos positivos
+ - **Recall**: mide la capacidad de detección(párticulas que realmente son de una clase) -> TP/(TP+FN)
+    El recall de todas las partículas es relativamente bueno, salvo el de la PEL que es algo más bajo debido la gran cantidad de falsos negativos
+ - **f1-score**: media armónica que penaliza valores extremos, para saber si el modelo es bueno en precisión y recall a la vez -> 2·((Precisión·Recall)/(Precisión·Recall))
+    Esta media es alta en las partículas FRA y PEL, pero baja en las TAR por culpa de su precisión
+
+ - **Accuracy**: rendimiento general del modelo -> total aciertos/total de muestras
+ - **Macro avg**: promedio de las precisiones y recalls
+ - **Weighted avg**: promedio entre las clases pero le da más importancia a las clases que tienen más muestras -> ((metrica0 · support0) + ...) / total de muestras
+ 
 
 <!-- - [Práctica 4](P4/README.md) -->
 <!-- - [Práctica 5](P5/README.md) -->
