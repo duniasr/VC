@@ -10,7 +10,7 @@ Curso 2025/2026
 <!-- - [Práctica 3](P2/README.md) -->
 
 ## Descripción
-En la Práctica 3 se realizan transformaciones básicas en imágenes y vídeos haciendo uso de las librerías; OpenCV, NumPy , Matplotlib. En específico con la práctica se pretende entender el funcionamiento para la deteccion de bordes y la sustracción de fondo.
+En la Práctica 3 se pretende adquirir nociones para extraer información geométrica de objetos presentes en una imagen, con el fin de caracterizarlos y posteriormente ser capaz de identificarlos de forma automática en categorías. 
 
 ## Requisitos
 Para esta práctica haremos uso de Python 3.11, Anaconda y de las librerías:  
