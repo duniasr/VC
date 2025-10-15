@@ -45,11 +45,11 @@ Finalmente se visualizan los resultados con `cv2.rectangle` y `cv2.putText` que 
 
 Para comprobar, el código propuesto se ha aplicado a 3 imágenes:
 1. Caso ideal con fondo blanco y sin solapamiento
-![caso1](./imagenes/output1.png)
+![caso1](./outputs/output1.png)
 2. Caso no ideal 1
-![caso1](./imagenes/output2.png)
+![caso1](./outputs/output2.png)
 3. Caso no ideal 3
-![caso1](./imagenes/output3.png)
+![caso1](./outputs/output3.png)
 
 ### Ejercicio 2
 Objetivo -> extraer características (geométricas y/o visuales) de las tres imágenes completas de partida, y aprender patrones que permitan identificar las partículas en nuevas imágenes.
