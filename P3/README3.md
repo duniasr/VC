@@ -49,11 +49,13 @@ Para comprobar he aplicado el código propuesto a 3 imágenes:
 |:---:|:---:|
 | ![caso1](./outputs/Monedas.png) | ![caso1.2](./outputs/MonedasM.png) |
 2. Caso no ideal 1
-![caso2](./outputs/Monedas2.png)  
-![caso2.2](./outputs/Monedas2M.png)
+| Resultado Final | Máscara Generada |
+|:---:|:---:|
+| ![caso2](./outputs/Monedas2.png)  | ![caso2.2](./outputs/Monedas2M.png) |
 3. Caso no ideal 2
-![caso3](./outputs/Monedas3.png) 
-![caso3.3](./outputs/Monedas3M.png)
+| Resultado Final | Máscara Generada |
+|:---:|:---:|
+| ![caso3](./outputs/Monedas3.png)  | ![caso3.3](./outputs/Monedas3M.png) |
 
 
 ### Ejercicio 2
