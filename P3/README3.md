@@ -88,17 +88,17 @@ A continuación, se visualizan los resultados. Se dibuja la matriz de confusión
 
 En la matriz obtenida podemos interpretar lo siguiente:
  - Partículas FRA:
-    - TP(true positive): partículas FRA clasificadas como FRA -> 34
+    - TP(true positive): partículas FRA clasificadas como FRA -> 34 de las 49
     - FP(false positive): partículas TAR o PEL clasificadas como FRA -> 9 PEL y 1 TAR
     - FN(false negative): partículas FRA clasificadas como TAR o PEL -> 1 PEL y 13 TAR
  
  - Partículas PEL:
-    - TP(true positive): partículas PEL clasificadas como PEL -> 18
+    - TP(true positive): partículas PEL clasificadas como PEL -> 18 de las 34
     - FP(false positive): partículas TAR o FRA clasificadas como PEL -> 1 TAR y 1 FRA
     - FN(false negative): partículas PEL clasificadas como TAR o FRA -> 7 TAR y 9 FRA
 
  - Partículas TAR:
-    - TP(true positive): partículas TAR clasificadas como TAR -> 12
+    - TP(true positive): partículas TAR clasificadas como TAR -> 12 de las 14
     - FP(false positive): partículas PEL o FRA clasificadas como TAR -> 7 PEL y 13 FRA
     - FN(false negative): partículas TAR clasificadas como PEL o FRA -> 1 PEL y 1 FRA
 
