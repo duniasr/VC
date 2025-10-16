@@ -80,7 +80,7 @@ Para la ejecución y evaluación definimos el conjunto de imagenes de entrenamie
 
 Tras inicializar las listas de evaluación (y_true, y_pred) para guardar las etiquetas reales y predichas y cargar la imagen de test a color con `cv2.imread()`, se inicia un bucle para asociar las partículas detectadas con las anotaciones manuales del archivo CSV. Este bucle itera sobre cada anotación `annotations.iterrows()` y busca si el centroide de alguna partícula detectada cae dentro de su rectángulo delimitador. Si se encuentra una coincidencia, se utiliza el clasificador para predecir su clase y se guardan las etiquetas real y predicha.
 
-A continuación, se visualizan los resultados. Un bucle recorre las detecciones exitosas, dibujando sobre la imagen un rectángulo `cv2.rectangle()` y el texto de la clase predicha `cv2.putText()`. Por último se muestra la imagen, convertida a formato RGB con `cv2.cvtColor()` y se dibuja la matriz de confusión.
+A continuación, se visualizan los resultados. Se dibuja la matriz de confusión con `ConfusionMatrixDisplay` y se iprime una tabla con métricas para analizar las partículas.
 
 #### Análisis de la matriz de confusión:
 
@@ -110,7 +110,8 @@ Total de partículas evaluadas: 96
 Accuracy (Exactitud) General: 0.67
 
 --- Métricas por Tipo de Partícula ---
-              precision    recall  f1-score   support
+
+                 precision  recall  f1-score   support
 
          FRA       0.77      0.71      0.74        48
          PEL       0.90      0.53      0.67        34
