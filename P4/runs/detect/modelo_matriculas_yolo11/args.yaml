@@ -2,10 +2,10 @@ task: detect
 mode: train
 model: yolo11n.pt
 data: matriculas.yaml
-epochs: 50
+epochs: 40
 time: null
 patience: 100
-batch: 16
+batch: 4
 imgsz: 640
 save: true
 save_period: -1
@@ -103,4 +103,4 @@ auto_augment: randaugment
 erasing: 0.4
 cfg: null
 tracker: botsort.yaml
-save_dir: C:\Users\lucia\OneDrive\Escritorio\uniDUNIA_2\4CURSO\VC\VC\P4\runs\detect\modelo_matriculas_yolo11
+save_dir: C:\Users\dunis\Desktop\4CURSO_EII\VC\VC-main\P4\P4\runs\detect\modelo_matriculas_yolo11

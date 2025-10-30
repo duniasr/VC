@@ -9,7 +9,7 @@ path: C:\Users\lucia\OneDrive\Escritorio\uniDUNIA_2\4CURSO\VC\VC\P4
 # Rutas a las imágenes (relativas al 'path' de arriba)
 train: TGC_RBNW/train/images
 val: TGC_RBNW/val/images
-# test: TGC_RBNW/test/images  # Omitimos 'test' ya que no lo usamos
+test: TGC_RBNW/test/images  # Omitimos 'test' ya que no lo usamos
 
 # --- Clases ---
 # Número de clases que anotaste
