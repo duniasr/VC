@@ -1,2 +1,0 @@
-P4/runs/detect/
-P4/TGC_RBNW/
