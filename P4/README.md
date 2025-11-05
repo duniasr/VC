@@ -149,6 +149,33 @@ El funcionamiento es el siguiente:
 | PGC7085.jpg | 0.84 | JPGC7085N | 325.9 | IPGC7089N | 187.3 |
 
 Basándome en las salidas producidas, observamos que EasyOCR es la herramienta más precisa, logrando leer correctamente varias matrículas 0116GPD y 2753LBJ, mientras que Tesseraact falla catastróficamente en varias matrículas, devolviendo N/A, y no detectando ninguna al 100% bien. Por otro lado, Tesseract es bastante más rápido que EasyOCR pero su fiablilidad, como ya mencioné, es muy baja. Por lo tanto entre estas dos opciones, EasyOCR es la opción más precisa a pesar de ser más lenta pues lo interesante de la práctica es que se detecten las matrículas.
+
+### Procesamiento de vídeo y detección de clases
+El procedimiento es el siguiente:
+1.  Carga todos los modelos (YOLOv8n, YOLO-Matrículas, EasyOCR) una sola vez al inicio.
+2.  Detecta y Sigue Objetos: Ejecuta `model_general_coches.track()` para obtener una lista de todos los vehículos y personas con sus coordenadas (`x1, y1, x2, y2`) y su `track_id`.
+3.  Detecta y Lee Matrículas: Ejecuta `model_matriculas.predict()` y `EasyOCR` para obtener una lista de todas las matrículas detectadas en el frame, con sus coordenadas (`mx1, my1, mx2, my2`) y el `texto_matricula`.
+4.  Asocia y Escribe en CSV:
+    * Itera sobre cada objeto seguido (ej: un `car` con `track_id: 10`).
+    * Comprueba si este objeto es un vehículo.
+    * Si lo es, itera sobre la lista de matrículas detectadas y calcula el IoU (superposición) entre la caja del coche y la caja de cada matrícula.
+    * La matrícula con la superposición más alta se asocia a ese coche.
+    * Finalmente, escribe una sola fila en el CSV con los datos del objeto y los datos de la matrícula asociada (o `N/A` si no se encontró ninguna).
+
+Las salidas generadas son 2:
+* Vídeo de Resultado (`resultados_video/video_final_con_ocr_asociado.mp4`):
+    * Un vídeo que muestra el procesamiento en tiempo real.
+    * Cajas Azules: Para personas y vehículos, con su `ID` de seguimiento (ej: `ID: 10 (car)`).
+    * Cajas Verdes: Para matrículas, con el texto leído por OCR (ej: `1234ABC (0.95)`).
+
+* Log de Detecciones (`resultados_video/log_detecciones_asociado.csv`):
+    * Un archivo CSV que registra cada detección de objeto por fotograma, con un formato de 15 columnas.
+    * Si un objeto es una `person`, las columnas de la matrícula se rellenan con `N/A`.
+    * Si un objeto es un `car`, pero no se detectó su matrícula, las columnas de la matrícula se rellenan con `N/A`.
+    * Si un objeto es un `car` y se detectó su matrícula, la misma fila contendrá las coordenadas del coche, su ID, y también las coordenadas y el texto de su matrícula.
+
+    Formato del CSV:
+    `fotograma, tipo_objeto, confianza, identificador_tracking, x1, y1, x2, y2, matricula_en_su_caso, confianza_matricula, mx1, my1, mx2, my2, texto_matricula`
     
 <!-- - [Práctica 5](P5/README.md) -->
 <!-- - [Práctica 6](P6/README.md) -->
