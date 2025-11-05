@@ -148,7 +148,7 @@ El funcionamiento es el siguiente:
 | GX497.jpeg | 0.21 | N/A | 72.0 | N/A | 191.2 |
 | PGC7085.jpg | 0.84 | JPGC7085N | 325.9 | IPGC7089N | 187.3 |
 
-    Basándome en las salidas producidas, observamos que EasyOCR es la herramienta más precisa, logrando leer correctamente varias matrículas 0116GPD y 2753LBJ, mientras que Tesseraact falla catastróficamente en varias matrículas, devolviendo N/A, y no detectando ninguna al 100% bien. Por otro lado, Tesseract es bastante más rápido que EasyOCR pero su fiablilidad, como ya mencioné, es muy baja. Por lo tanto entre estas dos opciones, EasyOCR es la opción más precisa a pesar de ser más lenta pues lo interesante de la práctica es que se detecten las matrículas.
+Basándome en las salidas producidas, observamos que EasyOCR es la herramienta más precisa, logrando leer correctamente varias matrículas 0116GPD y 2753LBJ, mientras que Tesseraact falla catastróficamente en varias matrículas, devolviendo N/A, y no detectando ninguna al 100% bien. Por otro lado, Tesseract es bastante más rápido que EasyOCR pero su fiablilidad, como ya mencioné, es muy baja. Por lo tanto entre estas dos opciones, EasyOCR es la opción más precisa a pesar de ser más lenta pues lo interesante de la práctica es que se detecten las matrículas.
     
 <!-- - [Práctica 5](P5/README.md) -->
 <!-- - [Práctica 6](P6/README.md) -->
