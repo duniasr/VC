@@ -51,6 +51,41 @@ Para el entrenamiento de nuestro modelo los parámetros más importantes especif
 * 640x640 para el tamaño redimensionado de las imágenes
 * 4 para el número de imágenes que se procesan a la vez, sobretodo porque ejecutamos el modelo sin gpu
 
+## Valoración modelo entrenado 
+
+Época final:
+epoch,time,train/box_loss,train/cls_loss,train/dfl_loss,metrics/precision(B),metrics/recall(B),metrics/mAP50(B),metrics/mAP50-95(B),val/box_loss,val/cls_loss,val/dfl_loss,lr/pg0,lr/pg1,lr/pg2
+`70,8678.46,0.62443,0.61679,0.8347,0.99309,0.77083,0.83819,0.64758,0.77605,0.77253,0.88704,4.82857e-05,4.82857e-05,4.82857e-05`
+
+- Observando los resultados del csv generado vemos los siguientes resultados:
+* 83.8% de precisión media (metrics/mAP50)
+* 99.3% de precisión (metrics/precision(B)), es decir, casi nunca da falsos positivos pues cuando dice que algo es una matrícula, lo es.
+* 77.1% de recall (metrics/recall(B)), es decir, este es el porciento de matrículas que encuentra, se le escapa el 23%.
+
+![Imágenes de Batch 0 y 1](../P4/runs/detect/modelo_matriculas_yolo11/results.png)
+
+Por otro lado, las gráficas de train/box_loss y val/box_loss (y las de cls y dfl) bajan juntas. Esto significa que el modelo no solo memorizó las imágenes de entrenamiento, sino que aprendió las "reglas" para encontrar matrículas y las aplicó con éxito a imágenes nuevas. Observando estas gráficas también, nos damos cuenta que no hay overfitting.
+
+- Procedemos a analizar la matriz de confusión generada:
+
+
+![Matriz de confusión](../P4/runs/detect/modelo_matriculas_yolo11/confusion_matrix_normalized.png)
+
+Esta matriz confirma exactamente lo que vimos en las métricas.
+* Fila matricula (True) -> Columna matricula (Predicted): 0.77 (77%). Esto es el Recall. Confirma que el 77% de las matrículas reales fueron encontradas.
+
+* Fila matricula (True) -> Columna background (Predicted): 0.23 (23%). Este es el error. El 23% de las matrículas reales fueron ignoradas por el modelo (las confundió con el "fondo"). Este es tu principal problema: Falsos Negativos.
+
+El modelo es muy fiable, funciona perfectamente en condiciones ideales, con matrículas cercanas, bien iluminadas y en alta resolución (como se ve en batch0 y batch1).
+
+![Imágenes de Batch 0 y 1](../P4/runs/detect/modelo_matriculas_yolo11/val_batch0_pred.jpg)
+![Imágenes de Batch 0 y 1](../P4/runs/detect/modelo_matriculas_yolo11/val_batch1_pred.jpg)
+
+
+Pero tiene problemas con los falsos negativos. Falla al no detectar matrículas que están lejos, son pequeñas o están en ángulos difíciles, como las de los vehículos lejanos en batch2.
+
+![Imágenes de Batch 2](../P4/runs/detect/modelo_matriculas_yolo11/val_batch2_pred.jpg)
+
 ### Validación Visual: Detección Combinada de vehículos y matrículas
 El segundo bloque de código se utiliza para probar y visualizar el rendimiento de nuestros dos modelos YOLO (`yolov8n.pt` general y el `best.pt` personalizado) ejecutándolos en conjunto sobre un set de imágenes de prueba.
 
