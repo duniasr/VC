@@ -1,19 +1,15 @@
-# -----------------------------------------------------------------
-# ¡¡ATENCIÓN!!
-# Revisa que esta ruta 'path' sea la ruta ABSOLUTA
-# a la carpeta raíz de tu proyecto P4.
-# (La he copiado de tu error anterior, debería estar bien)
-# -----------------------------------------------------------------
+# ruta principal
 path: C:\Users\lucia\OneDrive\Escritorio\uniDUNIA_2\4CURSO\VC\VC\P4
 
-# Rutas a las imágenes (relativas al 'path' de arriba)
+# Ruta a las imágenes de ENTRENAMIENTO
 train: TGC_RBNW/train/images
+# Ruta a las imágenes de VALIDACIÓN
 val: TGC_RBNW/val/images
+# Ruta a las imágenes de TEST
 test: TGC_RBNW/test/images  # Omitimos 'test' ya que no lo usamos
 
-# --- Clases ---
-# Número de clases que anotaste
+# Número de clases que queremos detectar
 nc: 1
 
-# Nombres de las clases (¡Exactamente como en labelme!)
+# Nombres de las clases
 names: ['matricula']
