@@ -23,6 +23,7 @@ Para esta práctica haremos uso de Python 3.11, Anaconda y de las librerías:
 - time
 - csv
 - matplotlib
+
 Además nos conectaremos al entorno 'VC_P4' creado con Anaconda.
 
 ## Modo de ejecución
