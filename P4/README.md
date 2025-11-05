@@ -128,9 +128,9 @@ El funcionamiento es el siguiente:
     * Limpia y almacena el texto resultante y el tiempo.
 6.  Generación de Salidas: El script produce dos tipos de resultado en la carpeta `resultados_comparativa_OCR/`:
     a.  Imágenes Anotadas: Una por cada imagen de prueba. En estas imágenes, cada matrícula detectada muestra:
-        * El texto de EasyOCR (en verde, arriba).
-        * El texto de Tesseract (en magenta, abajo).
-        * Esto permite una comparación visual inmediata de la precisión.
+    * El texto de EasyOCR (en verde, arriba).
+    * El texto de Tesseract (en magenta, abajo).
+    * Esto permite una comparación visual inmediata de la precisión.
         Enlace a las imagnes con detecciones:
         https://drive.google.com/drive/folders/19up6GJlBXfLrezXfgdK5kzA7X2W9BcJI?usp=drive_link
 
