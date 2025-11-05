@@ -51,6 +51,9 @@ Para el entrenamiento de nuestro modelo los parámetros más importantes especif
 * 640x640 para el tamaño redimensionado de las imágenes
 * 4 para el número de imágenes que se procesan a la vez, sobretodo porque ejecutamos el modelo sin gpu
 
+Las fotos usadas son parte de las subidas a un drive por compañeros, fotos en las que se hizo el trabajo de labelme pertinente. El script dividir_dataset.py adjunto se usó para dividir dichas imagenes y etiquetas entre las carpetas val, train y test.
+Enlace fotos del dataset antes de procesarse por el script divisor:
+
 ### Valoración modelo entrenado 
 
 Época final:
@@ -99,7 +102,7 @@ El funcionamiento que sigue es el siguiente:
 4.  Dibuja los resultados en una copia de la imagen:
     Rectángulos azules para los vehículos.
     Rectángulos verdes para las matrículas.
-5.  Guarda la imagen anotada con ambas detecciones en una carpeta de salida (ej: `resultados2_deteccion_combinada_y11base/`).
+5.  Guarda la imagen anotada con ambas detecciones en una carpeta de salida (ej: `resultados2_deteccion_combinada_y11base/`). Enlace a dichas fotos:
 
 
 ### Comparativa detección de matrículas entre EasyOCR y Tesseract
