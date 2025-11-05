@@ -52,7 +52,8 @@ Para el entrenamiento de nuestro modelo los parámetros más importantes especif
 * 4 para el número de imágenes que se procesan a la vez, sobretodo porque ejecutamos el modelo sin gpu
 
 Las fotos usadas son parte de las subidas a un drive por compañeros, fotos en las que se hizo el trabajo de labelme pertinente. El script dividir_dataset.py adjunto se usó para dividir dichas imagenes y etiquetas entre las carpetas val, train y test.
-Enlace fotos del dataset antes de procesarse por el script divisor:
+Enlace fotos del dataset seleccionadas:
+https://drive.google.com/drive/folders/1wZb8I-y8c60R-_WV8SbDLZZ5JsBNr8jU?usp=drive_link 
 
 ### Valoración modelo entrenado 
 
@@ -70,7 +71,6 @@ epoch,time,train/box_loss,train/cls_loss,train/dfl_loss,metrics/precision(B),met
 Por otro lado, las gráficas de train/box_loss y val/box_loss (y las de cls y dfl) bajan juntas. Esto significa que el modelo no solo memorizó las imágenes de entrenamiento, sino que aprendió las "reglas" para encontrar matrículas y las aplicó con éxito a imágenes nuevas. Observando estas gráficas también, nos damos cuenta que no hay overfitting.
 
 - Procedemos a analizar la matriz de confusión generada:
-
 
 ![Matriz de confusión](../P4/runs/detect/modelo_matriculas_yolo11/confusion_matrix_normalized.png)
 
@@ -103,6 +103,7 @@ El funcionamiento que sigue es el siguiente:
     Rectángulos azules para los vehículos.
     Rectángulos verdes para las matrículas.
 5.  Guarda la imagen anotada con ambas detecciones en una carpeta de salida (ej: `resultados2_deteccion_combinada_y11base/`). Enlace a dichas fotos:
+https://drive.google.com/drive/folders/1l8Z7kmHjDP2c3WajPm4T2usQix2xVfgl?usp=drive_link 
 
 
 ### Comparativa detección de matrículas entre EasyOCR y Tesseract
@@ -130,6 +131,8 @@ El funcionamiento es el siguiente:
         * El texto de EasyOCR (en verde, arriba).
         * El texto de Tesseract (en magenta, abajo).
         * Esto permite una comparación visual inmediata de la precisión.
+        Enlace a las imagnes con detecciones:
+        https://drive.google.com/drive/folders/19up6GJlBXfLrezXfgdK5kzA7X2W9BcJI?usp=drive_link
 
     b.  Archivo CSV: Un único archivo, `comparativa_ocr_results.csv`, que recopila todos los datos cuantitativos.
         Aquí dejamos la tabla creada por el csv:
@@ -180,6 +183,8 @@ Las salidas generadas son 2:
     Formato del CSV:
     `fotograma, tipo_objeto, confianza, identificador_tracking, x1, y1, x2, y2, matricula_en_su_caso, confianza_matricula, mx1, my1, mx2, my2, texto_matricula`
     
+    Enlace al video y resultados: https://drive.google.com/drive/folders/17p2zTZVuZdHunnR_7VHDFvreBzDwUI_x?usp=drive_link 
+
 <!-- - [Práctica 5](P5/README.md) -->
 <!-- - [Práctica 6](P6/README.md) -->
 <!-- - [Práctica 7](P7/README.md) -->
