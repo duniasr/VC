@@ -42,7 +42,7 @@ Además nos conectaremos al entorno 'VC_P4' creado con Anaconda.
     Además de la librería de Python (pytesseract), se requiere el binario de Tesseract.
 
 ## Resultados
-La visualización de los resultados se obtiene al ejecutar el código. Desglosamos ahora cada ejercicio:
+La visualización de los resultados está a través de enlaces en este mismo README
 La IA Gemini se utilizó como recurso de apoyo para aclarar dudas, explorar funcionalidades de la librerías que no conocía y obtener orientación.
 
 
