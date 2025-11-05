@@ -42,7 +42,8 @@ Además nos conectaremos al entorno 'VC_P4' creado con Anaconda.
     Además de la librería de Python (pytesseract), se requiere el binario de Tesseract.
 
 ## Resultados
-La visualización de los resultados está a través de enlaces en este mismo README
+La visualización de los resultados está a través de enlaces en este mismo README.
+
 La IA Gemini se utilizó como recurso de apoyo para aclarar dudas, explorar funcionalidades de la librerías que no conocía y obtener orientación.
 
 
@@ -59,7 +60,8 @@ https://drive.google.com/drive/folders/1wZb8I-y8c60R-_WV8SbDLZZ5JsBNr8jU?usp=dri
 ### Valoración modelo entrenado 
 
 Época final:
-epoch,time,train/box_loss,train/cls_loss,train/dfl_loss,metrics/precision(B),metrics/recall(B),metrics/mAP50(B),metrics/mAP50-95(B),val/box_loss,val/cls_loss,val/dfl_loss,lr/pg0,lr/pg1,lr/pg2
+
+`epoch,time,train/box_loss,train/cls_loss,train/dfl_loss,metrics/precision(B),metrics/recall(B),metrics/mAP50(B),metrics/mAP50-95(B),val/box_loss,val/cls_loss,val/dfl_loss,lr/pg0,lr/pg1,lr/pg2`
 `70,8678.46,0.62443,0.61679,0.8347,0.99309,0.77083,0.83819,0.64758,0.77605,0.77253,0.88704,4.82857e-05,4.82857e-05,4.82857e-05`
 
 - Observando los resultados del csv generado vemos los siguientes resultados:
