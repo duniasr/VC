@@ -53,7 +53,7 @@ Para el entrenamiento de nuestro modelo los parámetros más importantes especif
 * 640x640 para el tamaño redimensionado de las imágenes
 * 4 para el número de imágenes que se procesan a la vez, sobretodo porque ejecutamos el modelo sin gpu
 
-Las fotos usadas son parte de las subidas a un drive por compañeros, fotos en las que se hizo el trabajo de labelme pertinente. El script dividir_dataset.py adjunto se usó para dividir dichas imagenes y etiquetas entre las carpetas val, train y test.
+Las fotos usadas son parte de las subidas a un drive por compañeros, fotos en las que se hizo el trabajo de labelme pertinente. El script dividir_dataset.py adjunto se usó para dividir dichas imagenes y etiquetas entre las carpetas val(20%), train(70%) y test(10%).
 Enlace fotos del dataset seleccionadas:
 https://drive.google.com/drive/folders/1wZb8I-y8c60R-_WV8SbDLZZ5JsBNr8jU?usp=drive_link 
 

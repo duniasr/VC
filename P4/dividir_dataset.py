@@ -5,13 +5,12 @@ import random
 import math
 
 # --- 1. CONFIGURACIÓN ---
-# ¡¡AJUSTA ESTAS RUTAS!!
 
 # 1. Ruta a tu carpeta con TODAS las imágenes (ej: ./TGC_RBNW/imagenes_totales)
-SOURCE_IMAGES_DIR = Path('./plates/images') # <--- AJUSTA ESTO
+SOURCE_IMAGES_DIR = Path('./plates/images')
 
 # 2. Ruta a tu carpeta con TODOS los .txt (ej: ./TGC_RBNW/labels_totales)
-SOURCE_LABELS_DIR = Path('./plates/txt') # <--- AJUSTA ESTO
+SOURCE_LABELS_DIR = Path('./plates/txt') 
 
 # 3. Ruta de destino donde se creará el dataset dividido
 OUTPUT_DIR = Path('./dataset_dividido') # <--- AJUSTA ESTO (se creará si no existe)
@@ -22,13 +21,8 @@ OUTPUT_DIR = Path('./dataset_dividido') # <--- AJUSTA ESTO (se creará si no exi
 #    Para 70% train, 20% val, 10% test (Recomendado):
 TRAIN_RATIO = 0.7
 VAL_RATIO = 0.2
-#
-#    Para "partes iguales" (33.3% / 33.3% / 33.3%):
-#    TRAIN_RATIO = 0.333
-#    VAL_RATIO = 0.333
 
-# Extensiones de imagen que buscará (puedes añadir más)
-IMAGE_EXTENSIONS = ['.jpg', '.png', '.jpeg']
+# Extensiones de imagen que buscará
 LABEL_EXTENSION = '.txt'
 
 # --- FIN DE CONFIGURACIÓN ---
@@ -137,6 +131,5 @@ def split_dataset():
     print(f"  - Test:  {counts['test']} archivos")
     print(f"\nDataset listo en: {OUTPUT_DIR.resolve()}")
 
-# Esta línea ejecuta la función cuando corres el script
 if __name__ == "__main__":
     split_dataset()
