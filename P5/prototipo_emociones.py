@@ -10,7 +10,7 @@ class_names = joblib.load('emotion_class_names.pkl')
 
 cap = cv2.VideoCapture(0)
 font = cv2.FONT_HERSHEY_SIMPLEX
-color_reaccion = (0, 255, 0)
+color_reaccion = (180, 180, 180)
 
 while True:
     ret, frame = cap.read()
@@ -36,8 +36,8 @@ while True:
         emotion_label = class_names[prediction_index]
 
         # Dibujar
-        cv2.rectangle(frame, (x, y), (x+w, y+h), color_reaccion, 2)
-        cv2.putText(frame, emotion_label, (x, y-10), font, 0.9, color_reaccion, 2, cv2.LINE_AA)
+        cv2.rectangle(frame, (x, y), (x+w, y+h), color_reaccion, 1)
+        cv2.putText(frame, emotion_label, (x, y-10), font, 0.9, color_reaccion, 1, cv2.LINE_AA)
 
     # Mostrar ventana nativa
     cv2.imshow('Detector de Emociones', frame)
