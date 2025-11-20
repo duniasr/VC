@@ -60,9 +60,9 @@ Continuamos con la llamada la función `LoadDataset`. Esta devuelve los arrays X
 
 Para finalizar, usamos la librería joblib para serializar y guardar las matrices X e Y en archivos .pkl (embeddings_X.pkl, labels_Y.pkl). Esto permite que el siguiente script (entrenamiento) cargue los datos instantáneamente sin tener que volver a procesar las imágenes.
 Se guardan tres archivos en disco:
-* embeddings_X.pkl: La matriz matemática con todas las caras procesadas.
-* labels_Y.pkl: Las respuestas correctas (qué emoción es cada vector).
-* emotion_class_names.pkl: Nos permitirá traducir en el futuro que la etiqueta 0 significa "angry" o la 3 significa "happy".
+* `embeddings_X.pkl`: La matriz matemática con todas las caras procesadas.
+* `labels_Y.pkl`: Las respuestas correctas (qué emoción es cada vector).
+* `emotion_class_names.pkl`: Nos permitirá traducir en el futuro que la etiqueta 0 significa "angry" o la 3 significa "happy".
 
 ## Entrenamiento y optimización del clasificador SVM
 Una vez convertidas las imágenes a vectores numéricos, utilizamos un algoritmo de aprendizaje supervisado para encontrar patrones que diferencien una emoción de otra.
@@ -81,11 +81,28 @@ Continuamos con la configuración del clasificador (SVM con Kernel RBF).
 A continuación, el método `.fit()` ejecuta el proceso de búsqueda y entrenamiento definido por `GridSearchCV`.
 
 Finalmente, guardamos los dos archivos esenciales para el prototipo:
-* emotion_svm_model.pkl: El "cerebro" entrenado con la mejor configuración encontrada.
-* emotion_scaler.pkl: La "regla" de normalización. Es vital guardar el scaler para aplicarle exactamente la misma transformación matemática a las caras que capte la webcam en el futuro.
+* `emotion_svm_model.pkl`: El clasificador SVM ya entrenado.
+* `emotion_scaler.pkl`: La "regla" de normalización. Es vital guardar el scaler para aplicarle exactamente la misma transformación matemática a las caras que capte la webcam en el futuro.
 
 
 ## Prototipo Filtro 1(con modelo entrenado)
+Este script integra el modelo entrenado en una aplicación de visión artificial que captura vídeo, procesa rostros frame a frame y genera una respuesta visual (pantalla de color) basada en la emoción detectada.
+
+Comenzamos con la carga de los tres archivos esenciales generados anteriormente:
+* `emotion_svm_model.pkl`
+* `emotion_scaler.pkl`
+* `emotion_class_names.pkl`
+
+Continuamos con la captura y detección facial (MTCNN). Mediante un bucle analizamos cada fotograma y utilizamos DeepFace.extract_faces con el backend MTCNN (Multi-task Cascaded Convolutional Networks). Usamos MTCNN, en vez de otro detector, pues es mucho más robusto ante variaciones de luz y pose, lo que mejora la experiencia de usuario en tiempo real, aunque requiere más cómputo. Aplicamos un filtro de confianza (> 0.75) para descartar falsos positivos.
+
+Para cada rostro validado:
+* Recortamos la región de interés de la cara y la convertimos a RGB y con `DeepFace.represent` (modelo FaceNet) convertimos la cara en el vector de 128 características. 
+* Normalizamos los valores del vector con `scaler.transform`. 
+* Utilizamos `svm_model.predict_proba` que nos da la clase ganadora y el porcentaje de certeza.
+* Si la certeza del modelo supera el 55%(`CONF_THRESHOLD`), se activa la reacción.
+* Implementamos una función `apply_tint` que utiliza `cv2.addWeighted` para fusionar la imagen original con una capa de color semitransparente.
+
+Cada emoción tiene asignado un código de color (ej: Amarillo para "happy", Verde para "disgusted"), proporcionando feedback visual instantáneo y aumentado sobre la realidad.
 
 ## Prototipo Filtro 2(libre)
 
