@@ -89,6 +89,7 @@ Resultados del modelo final, basado en SVM con kernel RBF y embeddings de FaceNe
 Realizando predicciones...
 REPORTE DE CLASIFICACIÓN
 ------------------------------------------------------
+```text
               precision    recall  f1-score   support
 
        angry       0.75      0.66      0.70       600
