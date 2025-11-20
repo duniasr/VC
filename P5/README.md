@@ -15,12 +15,14 @@ En la Práctica 5 se realiza el entrenamiento de un modelo propio para la extrac
 
 ## Requisitos
 Para esta práctica haremos uso de Python 3.11, Anaconda y de las librerías:
-- opencv
-- numpy
-- time
-- sklearn
-- joblib
-- deepface
+- opencv: procesamiento de imágenes y cámara
+- numpy: operaciones con matrices
+- time: para medir tiempo de cómputo de entrenamiento
+- sklearn: librería de Machine Learning que proporciona el algoritmo SVM
+- joblib: herramienta de serialización optimizada para guardar y cargar modelos entrenados y grandes arrays de datos en disco
+- deepface: framework de reconocimiento facial que simplifica el uso de modelos de Deep Learning (como FaceNet) para la detección y extracción de embeddings
+- random: generar obstáculos en posiciones aleatorias
+- os: verificar existencia de archivos
 
 Además nos conectaremos al entorno 'VC_P5' creado con Anaconda.
 
@@ -33,10 +35,6 @@ Además nos conectaremos al entorno 'VC_P5' creado con Anaconda.
 3. *Ejecutar el código de "Extracción de características".*
 4. *Ejecutar el código de "Entrenamiento".*
 5. *Ejecutar el script "prototipo_emociones_animado.py" y "prototipo_juegoVJ" para la visualización de los 2 filtros.*
-
-
-## Resultados
-La IA Gemini se utilizó como recurso de apoyo para aclarar dudas, explorar funcionalidades de la librerías que no conocía y obtener orientación.
 
 ## Extracción de características(Embeddings)
 En esta primera fase, el objetivo es transformar las imágenes "crudas" (píxeles) en una representación matemática compacta que un modelo de Machine Learning pueda procesar. No se realiza entrenamiento aquí, solo procesamiento de datos.
@@ -105,7 +103,45 @@ Para cada rostro validado:
 Cada emoción tiene asignado un código de color (ej: Amarillo para "happy", Verde para "disgusted"), proporcionando feedback visual instantáneo y aumentado sobre la realidad.
 
 ## Prototipo Filtro 2(libre)
+Este prototipo es un videojuego de estilo endless runner donde el jugador controla un personaje alienígena utilizando exclusivamente el movimiento vertical de su cabeza en el mundo real.
+Instrucciones:
+* Control: Mueve tu cabeza físicamente hacia arriba o abajo frente a la cámara para esquivar los muros.
+* Objetivo: Sobrevivir el mayor tiempo posible. La velocidad aumenta progresivamente. 
+* Teclas: 
+    ESPACIO: Reiniciar el juego tras un "Game Over". 
+    ESC: Salir.
 
+A diferencia del filtro de emociones, aquí la prioridad es la baja latencia (velocidad de respuesta). Por ello, se usa:
+* Sensor Biométrico (Input): Utilizamos la implementación de Haar Cascades de OpenCV, basada en el algoritmo clásico de Viola-Jones. Aunque es menos robusto ante rotaciones que las redes neuronales modernas (como MTCNN), es extremadamente rápido y computacionalmente ligero. Esto garantiza que el juego responda al movimiento de manera más ligera.
+* Renderizado y Motor Gráfico: La imagen de la webcam no se muestra; se utiliza únicamente como sensor de entrada. Cada fotograma se sobrescribe completamente con un fondo estático (background.png). Sobre este fondo se superponen los sprites (jugador y obstáculos) respetando sus transparencias.
+
+Funciones y Parámetros Clave
+1. Detección Facial: `detectMultiScale` es la función encargada de encontrar la cara en cada frame para mover al jugador. Parámetros:
+* gray: La imagen de entrada en escala de grises (optimiza el rendimiento).
+* scaleFactor=1.1: Especifica cuánto se reduce el tamaño de la imagen en cada escala de la pirámide de imágenes. Un valor de 1.1 significa que se reduce un 10% cada vez, ofreciendo un buen equilibrio entre precisión y velocidad.
+* minNeighbors=4: Especifica cuántos "vecinos" (detecciones superpuestas) debe tener cada rectángulo candidato para conservarlo. 
+* minSize=(30, 30): El tamaño mínimo del objeto. 
+Se ignoran las caras más pequeñas que esto.
+
+2. Carga segura de recursos: la función `load_asset` evita errores de ejecución pues:
+* Verifica si el archivo existe antes de cargarlo.
+* Utiliza el flag cv2.IMREAD_UNCHANGED. Esto es vital para cargar imágenes PNG manteniendo sus 4 canales (BGRA), ya que por defecto OpenCV elimina el canal Alfa.
+
+3. Superposición Gráfica: la función `overlay_png` realiza Alpha Blending (mezcla de transparencias). OpenCV no soporta canales alfa (transparencia) de forma nativa con una simple suma, por lo que calculamos la mezcla pixel a pixel. 
+* Lógica de recorte: Utilizamos background.shape[:2] y overlay.shape[:2] para obtener las dimensiones (Alto, Ancho) y calcular si el objeto se sale de la pantalla, recortándolo matemáticamente para evitar errores de ejecución (IndexError).
+Fórmula de mezcla: 
+$$
+\text{Pixel}_{final} = (\text{Pixel}_{objeto} \cdot \alpha) + (\text{Pixel}_{fondo} \cdot (1 - \alpha))
+$$
+
+4. Interfaz de Usuario (UI): `cv2.putText` es utilizada para dibujar el marcador y los mensajes de estado.
+
+5. Lógica de Generación Procedural
+El juego es infinito gracias a la generación dinámica de obstáculos:obstacles[-1][0] < width - 250: Este condicional comprueba la posición X del último obstáculo generado. El valor 250 define la distancia mínima horizontal entre muros, asegurando que el juego sea jugable y dando tiempo de reacción al usuario.
+
+![Imágenes de Batch 0 y 1](../P4/runs/detect/modelo_matriculas_yolo11/results.png)
+
+La IA Gemini se utilizó como recurso de apoyo para aclarar dudas, explorar funcionalidades de la librerías que no conocía y obtener orientación.
 
 <!-- - [Práctica 6](P6/README.md) -->
 <!-- - [Práctica 7](P7/README.md) -->
