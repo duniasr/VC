@@ -129,7 +129,7 @@ while True:
     # Si hay cara, la posición Y del jugador será el centro de la cara detectada
     if len(faces) > 0:
         (x, y, w, h) = faces[0] 
-        player_y = int(y + h / 2)
+        player_y = int(y + h / 2) # Centro cara
         face_detected = True
     
     # --- 2. Dibujar el juego ---
