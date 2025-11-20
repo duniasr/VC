@@ -3,7 +3,7 @@ import numpy as np
 import random
 import os 
 
-print("Iniciando Prototipo: Face Jump ")
+print("Iniciando Prototipo")
 
 # --- CONFIGURACIÓN ---
 # Carga el clasificador Haar Cascade para detección de rostros frontal.

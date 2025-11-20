@@ -139,7 +139,7 @@ $$
 5. Lógica de Generación Procedural
 El juego es infinito gracias a la generación dinámica de obstáculos:obstacles[-1][0] < width - 250: Este condicional comprueba la posición X del último obstáculo generado. El valor 250 define la distancia mínima horizontal entre muros, asegurando que el juego sea jugable y dando tiempo de reacción al usuario.
 
-![Imágenes de Batch 0 y 1](../P4/runs/detect/modelo_matriculas_yolo11/results.png)
+![Demo del juego](../P5/gifVideojuego.gif)
 
 La IA Gemini se utilizó como recurso de apoyo para aclarar dudas, explorar funcionalidades de la librerías que no conocía y obtener orientación.
 
