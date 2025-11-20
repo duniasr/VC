@@ -103,6 +103,7 @@ REPORTE DE CLASIFICACIÓN
     accuracy                           0.71      4036
    macro avg       0.73      0.71      0.71      4036
 weighted avg       0.73      0.71      0.71      4036
+```
 
 * Precisión(cuántas veces tiene razón en afirmar una emoción):
     Resultado de 73% global, lo cual indica que no suele dar **falsos positivos**. Sin embargo, esta métrica varía bastante entre clases: muy fiable en felicidad 82%, pero poco fiable en trizteza 49%.
