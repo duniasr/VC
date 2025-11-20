@@ -76,6 +76,7 @@ Se continua con la configuración del clasificador (SVM con Kernel RBF).
 `GridSearchCV` es usado para sistematizar el entrenamiento. En lugar de entrenar un único modelo con parámetros aleatorios, GridSearchCV genera múltiples versiones del clasificador SVM combinando diferentes valores de regularización (C) y coeficientes de kernel (Gamma), seleccionando finalmente el modelo que ofrece la mayor precisión estadística. Los parámetros críticos son:
 * C (Regularización): Controla la rigidez del margen. Un valor alto intenta clasificar todo correctamente (riesgo de sobreajuste), mientras que uno bajo permite más errores buscando una frontera más suave.
 * Gamma: Define cuánto se ajusta el modelo a los detalles de cada imagen. Un valor alto se ajusta mucho a cada punto individual y un valor bajo busca patrones más genereales y suaves agrupando los datos de forma más amplia.
+
 A continuación, el método `.fit()` ejecuta el proceso de búsqueda y entrenamiento definido por `GridSearchCV`.
 
 Finalmente, guardamos los dos archivos esenciales para el prototipo:
